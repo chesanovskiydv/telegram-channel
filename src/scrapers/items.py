@@ -14,16 +14,25 @@ from bs4 import BeautifulSoup
 
 
 def prepare_html(text, loader_context):
-    soup = BeautifulSoup(text)
+    soup = BeautifulSoup(text, 'html.parser')
     for a in soup.findAll('a'):
         a['href'] = loader_context.get('response').urljoin(a['href'])
 
     return remove_tags(str(soup), keep=('a',))
 
 
+def extract_img_url(image, loader_context):
+    soup = BeautifulSoup(image, 'html.parser')
+    img = soup.find('img')
+
+    return loader_context.get('response').urljoin(img.get('src')) if img else image
+
+
 class MessageItem(Item):
     text = Field(
         input_processor=MapCompose(prepare_html)
     )
-    image = Field()
+    image = Field(
+        input_processor=MapCompose(extract_img_url)
+    )
     url = Field()

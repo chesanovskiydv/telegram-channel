@@ -11,6 +11,7 @@ if message is None:
     raise ValueError("Message not found")
 
 channel = Channel(settings.BOT_ACCESS_TOKEN, settings.CHAT_ID)
+
 if message.image is not None:
     channel.send_photo(photo=message.image, caption=message.text)
 else:

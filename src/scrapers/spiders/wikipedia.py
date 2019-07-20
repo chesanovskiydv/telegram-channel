@@ -27,11 +27,9 @@ class WikipediaSpider(Spider):
     def parse_article_box(self, response, box_selector: Selector):
         raise NotImplementedError('{}.parse_article_box callback is not defined'.format(self.__class__.__name__))
 
-    def parse_list_box(self,response, box_selector: Selector) -> MessageItem:
+    def parse_list_box(self, response, box_selector: Selector) -> MessageItem:
         message_loader = MessageLoader(item=MessageItem(), selector=box_selector, response=response)
-        # @todo: implement
         message_loader.add_xpath('text', './ul/li')
-        message_loader.add_xpath('image', ".//a/img")
+        # message_loader.add_xpath('image', './/a/img')
         message_loader.add_value('url', response.url)
-        # @todo: implement
         yield message_loader.load_item()
