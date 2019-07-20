@@ -3,7 +3,7 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/loaders.html
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import MapCompose, TakeFirst
+from scrapy.loader.processors import TakeFirst
 
 
 class MessageLoader(ItemLoader):

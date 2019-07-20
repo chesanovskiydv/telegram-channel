@@ -12,6 +12,7 @@ scrapy = "*"
 alembic = "*"
 pymysql = "*"
 pypiwin32 = "*"
+bs4 = "*"
 
 [requires]
 python_version = "3.6"
