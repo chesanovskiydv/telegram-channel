@@ -2,7 +2,7 @@ import settings
 
 
 def mysql_connection_string():
-    return "mysql+pymysql://{username}:{password}@{host}:{port}/{database}?charset=utf8mb4".format(
+    return "mysql+pymysql://{username}:{password}@{host}:{port}/{database}?charset=utf8mb4&use_unicode=True".format(
         username=settings.DB_USERNAME,
         password=settings.DB_PASSWORD,
         host=settings.DB_HOST,

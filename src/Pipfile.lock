@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74533496175a8ad0da7917255df276ffd615b95c7ed91bfcfea482854732742e"
+            "sha256": "74d7d1705bc78196cc15f1138b84c3cb72c567771f3dca91f751ea87b1b2c80c"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -125,6 +125,10 @@
             "hashes": [],
             "version": "==19.0.0"
         },
+        "pypiwin32": {
+            "hashes": [],
+            "version": "==223"
+        },
         "python-dateutil": {
             "hashes": [],
             "version": "==2.8.0"
@@ -140,6 +144,10 @@
         "python-telegram-bot": {
             "hashes": [],
             "version": "==11.1.0"
+        },
+        "pywin32": {
+            "hashes": [],
+            "version": "==224"
         },
         "queuelib": {
             "hashes": [],

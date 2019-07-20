@@ -19,10 +19,10 @@ def upgrade():
     op.create_table(
         'messages',
         sa.Column('id', sa.BigInteger, primary_key=True),
-        sa.Column('text', sa.UnicodeText),
-        sa.Column('image', sa.String(64), nullable=True),
-        sa.Column('url', sa.UnicodeText),
-        sa.Column('is_sent', sa.Boolean, server_default='0'),
+        sa.Column('text', sa.UnicodeText, nullable=False),
+        sa.Column('image', sa.UnicodeText),
+        sa.Column('url', sa.UnicodeText, nullable=False),
+        sa.Column('is_sent', sa.Boolean, nullable=False, server_default='0'),
         sa.Column('created_at', sa.TIMESTAMP, server_default=sa.func.now()),
         sa.Column('updated_at', sa.TIMESTAMP, server_default=sa.text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
     )
