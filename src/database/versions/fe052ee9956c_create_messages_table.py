@@ -22,7 +22,7 @@ def upgrade():
         sa.Column('text', sa.UnicodeText, nullable=False),
         sa.Column('image', sa.UnicodeText),
         sa.Column('url', sa.UnicodeText, nullable=False),
-        sa.Column('is_sent', sa.Boolean, nullable=False, server_default='0'),
+        sa.Column('sent_at', sa.TIMESTAMP, nullable=True, server_default=None),
         sa.Column('created_at', sa.TIMESTAMP, server_default=sa.func.now()),
         sa.Column('updated_at', sa.TIMESTAMP, server_default=sa.text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
     )

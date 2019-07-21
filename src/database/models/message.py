@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import Column, BigInteger, UnicodeText, TIMESTAMP, Boolean
+from sqlalchemy import Column, BigInteger, UnicodeText, TIMESTAMP
 from sqlalchemy import func, text as satext
 
 from .base import Base
@@ -12,6 +12,6 @@ class Message(Base):
     text = Column(UnicodeText, nullable=False)
     image = Column(UnicodeText)
     url = Column(UnicodeText, nullable=False)
-    is_sent = Column(Boolean, nullable=False, server_default='0')
+    sent_at = Column(TIMESTAMP, nullable=True, server_default=None)
     created_at = Column(TIMESTAMP, server_default=func.now())
     updated_at = Column(TIMESTAMP, server_default=satext('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))

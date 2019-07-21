@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import settings
 
+from datetime import datetime
 from database import session
 from database.models import Message
 
 from channel import Channel
 
-message = session.query(Message).filter(Message.is_sent.is_(False)).first()
+message = session.query(Message).filter(Message.sent_at.is_(None)).first()
 if message is None:
     raise ValueError("Message not found")
 
@@ -17,5 +18,5 @@ if message.image is not None:
 else:
     channel.send_message(text=message.text)
 
-message.is_sent = True
+message.sent_at = datetime.now()
 session.flush()
