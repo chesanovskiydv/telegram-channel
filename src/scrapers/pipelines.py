@@ -33,7 +33,8 @@ class MessagePipeline(object):
 
                 return not session.query(
                     session.query(alias).filter(
-                        alias.text == message_model.text, alias.image == message_model.image
+                        alias.text == message_model.text,
+                        alias.image == message_model.image
                     ).exists()
                 ).scalar()
 
