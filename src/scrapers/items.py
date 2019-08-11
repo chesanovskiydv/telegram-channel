@@ -10,6 +10,7 @@ from scrapy import Item, Field
 from scrapy.loader.processors import MapCompose
 
 from w3lib.html import remove_tags
+from urllib import parse
 
 from bs4 import BeautifulSoup
 
@@ -37,9 +38,11 @@ def extract_img_url(image, loader_context):
 
 class MessageItem(Item):
     text = Field(
-        input_processor=MapCompose(prepare_html)
+        input_processor=MapCompose(prepare_html, parse.unquote)
     )
     image = Field(
-        input_processor=MapCompose(extract_img_url)
+        input_processor=MapCompose(extract_img_url, parse.unquote)
     )
-    url = Field()
+    url = Field(
+        input_processor=MapCompose(parse.unquote)
+    )
