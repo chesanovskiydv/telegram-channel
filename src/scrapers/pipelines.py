@@ -12,6 +12,8 @@ from sqlalchemy.orm import aliased
 from database import session
 from database.models import Message
 
+from w3lib.html import remove_tags
+
 
 class MessagePipeline(object):
     def process_item(self, item, spider):
@@ -23,7 +25,7 @@ class MessagePipeline(object):
     def save_item(item: Item, spider):
         if isinstance(item, MessageItem):
 
-            def message_is_unique(message_model, limit=20):
+            def message_is_unique(message_model: Message, limit=20) -> bool:
                 subquery = session.query(Message) \
                     .order_by(Message.created_at.desc(), Message.id.desc()) \
                     .limit(limit) \
@@ -38,8 +40,13 @@ class MessagePipeline(object):
                     ).exists()
                 ).scalar()
 
+            def message_fit_the_length(message_model: Message) -> bool:
+                if message_model.image:
+                    return len(remove_tags(message_model.text)) <= 1024
+                return len(remove_tags(message_model.text)) <= 4096
+
             message = Message(text=item.get('text'), image=item.get('image'), url=item.get('url'))
 
-            if message_is_unique(message):
+            if message_is_unique(message) and message_fit_the_length(message):
                 with session.begin():
                     session.add(message)
